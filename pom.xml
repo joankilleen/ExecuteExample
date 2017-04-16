@@ -17,19 +17,16 @@
                 <artifactId>antlr4-maven-plugin</artifactId>
                 <version>4.1</version>
                 <configuration>
-                    <configuration>
-                        <listener>true</listener>
-                        <visitor>true</visitor>
-                        <arguments>
-                            <argument>-package</argument>
-                        </arguments>
-                    </configuration>
+                    <arguments>
+                        <!--                        <argument>-listener</argument>-->
+                        <argument>-visitor</argument>
+                        <!-- <argument>-Dlanguage=JavaScript</argument> -->
+                    </arguments>
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
                             <goal>antlr4</goal>
-                            <goal>help</goal>
                         </goals>
                     </execution>
                 </executions>

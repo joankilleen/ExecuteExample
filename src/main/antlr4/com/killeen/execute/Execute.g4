@@ -6,8 +6,9 @@ grammar Execute;
 //#EXECUTE scenarioName
 
 execute: 
-    scenarioName
-    |   genericProcess
+    '#EXECUTE '
+    genericProcess
+    | scenarioName  
     ;
 
 scenarioName: 
@@ -19,6 +20,6 @@ genericProcess:
     ;
 
 STRING:
-    [a-zA-Z] [a-zA-Z0-9.]* // Match any letters or numbers starting with a letter. '.' also allowed
+    [a-zA-Z][a-zA-Z0-9.]* // Match any letters or numbers starting with a letter. '.' also allowed
     ;
 WS  :   [ \t\n\r]+ -> skip ;

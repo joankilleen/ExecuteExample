@@ -6,11 +6,13 @@ grammar Execute;
 //#EXECUTE scenarioName
 
 execute: 
-    '#EXECUTE '
-    genericProcess
-    | scenarioName  
+    executeKeyword genericProcess
+    | executeKeyword scenarioName  
     ;
 
+executeKeyword:
+    '#EXECUTE'
+    ;
 scenarioName: 
     STRING
     ;
@@ -23,3 +25,4 @@ STRING:
     [a-zA-Z][a-zA-Z0-9.]* // Match any letters or numbers starting with a letter. '.' also allowed
     ;
 WS  :   [ \t\n\r]+ -> skip ;
+

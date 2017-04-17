@@ -11,6 +11,8 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import com.killeen.execute.ExecuteParser;
 import com.killeen.execute.ExecuteParser.ExecuteContext;
 import com.killeen.execute.ExecuteLexer;
+import java.util.List;
+import org.antlr.v4.runtime.Token;
 
 /**
  *
@@ -36,10 +38,16 @@ public class Main {
             System.out.println("created lexer");
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             System.out.println("created tokens");
+            List<? extends Token> list;
+            list = lexer.getAllTokens();
+            
+            list.forEach((next) -> {
+                System.out.println("Token:" +  next + " " + next.getStartIndex() + " " + next.getStopIndex());
+            });
             ExecuteParser parser = new ExecuteParser(tokens); // pass column number!
             System.out.println("created parser");
-            parser.setBuildParseTree(false); // don't waste time bulding a tree
-            System.out.println("set false parser");
+            parser.setBuildParseTree(true); // don't waste time bulding a tree
+            
             ExecuteContext filectx = parser.execute();
             System.out.println("finished parse file");// parse
             System.out.println(filectx.toInfoString(parser));// parse

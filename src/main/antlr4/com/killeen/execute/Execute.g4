@@ -5,6 +5,9 @@ grammar Execute;
 //#EXECUTE genericProcess<name of some process>
 //#EXECUTE scenarioName
 
+scriptContent: //a script can contain multiple execute statements
+    execute+
+    ;
 execute: 
     executeKeyword genericProcess
     | executeKeyword scenarioName  

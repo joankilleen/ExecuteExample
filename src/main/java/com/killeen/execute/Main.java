@@ -13,6 +13,8 @@ import com.killeen.execute.ExecuteParser.ExecuteContext;
 import com.killeen.execute.ExecuteLexer;
 import java.util.List;
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 /**
  *
@@ -30,27 +32,28 @@ public class Main {
         };
 
         try {
-            
+
             ANTLRInputStream input = new ANTLRInputStream(fileInput);
-            System.out.println("created imput stream");
             ExecuteLexer lexer;
             lexer = new ExecuteLexer(input);
-            System.out.println("created lexer");
             CommonTokenStream tokens = new CommonTokenStream(lexer);
-            System.out.println("created tokens");
-            List<? extends Token> list;
+            /*List<? extends Token> list;
             list = lexer.getAllTokens();
-            
+
             list.forEach((next) -> {
-                System.out.println("Token:" +  next + " " + next.getStartIndex() + " " + next.getStopIndex());
-            });
+                System.out.println("Token:" + next + " " + next.getStartIndex() + " " + next.getStopIndex());
+            });*/
             ExecuteParser parser = new ExecuteParser(tokens); // pass column number!
-            System.out.println("created parser");
-            parser.setBuildParseTree(true); // don't waste time bulding a tree
-            
-            ExecuteContext filectx = parser.execute();
+
+            /*ExecuteContext filectx = parser.execute();
             System.out.println("finished parse file");// parse
-            System.out.println(filectx.toInfoString(parser));// parse
+            System.out.println(filectx.toInfoString(parser));// parse*/
+
+            ParseTree tree = parser.scriptContent(); // parse
+            System​.out.println(tree.toStringTree(parser));
+            ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
+            ExecuteCommandListener execute = new ExecuteCommandListener(parser);
+            walker.walk(execute, tree); // initiate walk of tree with listener
 
         } catch (Exception ex) {
             System.out.println("exception block");
@@ -58,6 +61,9 @@ public class Main {
             System.out.println(ex.getMessage());
             ex.printStackTrace();
         }
+    }
+    static void startParse(InputStream fileInput){
+        
     }
 
 }

@@ -9,13 +9,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <antlr4-version>4.5</antlr4-version>
     </properties>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr4-maven-plugin</artifactId>
-                <version>4.1</version>
+                <version>${antlr4-version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -42,13 +43,23 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <configuration>
+                    <mainClass>Main</mainClass>
+                    <!-- arguments> <argument>2</argument> </arguments> -->
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-runtime</artifactId>
-            <version>4.1</version>
+            <version>${antlr4-version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

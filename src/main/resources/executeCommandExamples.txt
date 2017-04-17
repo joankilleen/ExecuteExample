@@ -1,1 +1,2 @@
 #EXECUTE genericProcess<testString1.testString>
+#EXECUTE testScenario

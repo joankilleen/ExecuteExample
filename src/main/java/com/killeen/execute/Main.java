@@ -30,7 +30,10 @@ public class Main {
         if (fileInput == null) {
             throw new IllegalStateException("resource file not found:" + resource);
         };
-
+        startParse(fileInput);
+        
+    }
+    static void startParse(InputStream fileInput){
         try {
 
             ANTLRInputStream input = new ANTLRInputStream(fileInput);
@@ -44,11 +47,6 @@ public class Main {
                 System.out.println("Token:" + next + " " + next.getStartIndex() + " " + next.getStopIndex());
             });*/
             ExecuteParser parser = new ExecuteParser(tokens); // pass column number!
-
-            /*ExecuteContext filectx = parser.execute();
-            System.out.println("finished parse file");// parse
-            System.out.println(filectx.toInfoString(parser));// parse*/
-
             ParseTree tree = parser.scriptContent(); // parse
             System​.out.println(tree.toStringTree(parser));
             ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
@@ -61,8 +59,6 @@ public class Main {
             System.out.println(ex.getMessage());
             ex.printStackTrace();
         }
-    }
-    static void startParse(InputStream fileInput){
         
     }
 
